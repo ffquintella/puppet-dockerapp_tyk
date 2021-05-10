@@ -6,7 +6,7 @@
 version: '3.3'
 services:
   tyk-gateway:
-    image: docker.tyk.io/tyk-gateway/tyk-gateway:v<%= $version %>
+    image: tykio/tyk-gateway:v<%= $version %>
     ports:
       - <%= $ports %>
     networks:
