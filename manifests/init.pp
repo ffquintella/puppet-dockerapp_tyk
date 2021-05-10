@@ -100,8 +100,8 @@ class dockerapp_tyk  (
     source  => 'puppet:///modules/dockerapp_tyk/middleware',
   }
 
-  file {"${conf_configdir}/docker-compose.yml":
-    content => epp('dockerapp_tyk/docker-compose.yml.epp', { 
+  file {"${conf_configdir}/docker-composer.yml":
+    content => epp('dockerapp_tyk/docker-composer.yml.epp', { 
       'version' => $version, 
       'ports' => $ports, 
       'data_dir' => $conf_datadir,
