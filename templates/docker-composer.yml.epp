@@ -1,6 +1,7 @@
 <%- |   String $version = '3.2.0',
         String $ports = '8080:8080',
-        String $redirect_url = 'http://localhost:4200'
+        String $data_dir = '',
+        String $config_dir = ''
 | -%>
 version: '3.3'
 services:
@@ -11,10 +12,10 @@ services:
     networks:
       - tyk
     volumes:
-      - ./tyk.standalone.conf:/opt/tyk-gateway/tyk.conf
-      - ./apps:/opt/tyk-gateway/apps
-      - ./middleware:/opt/tyk-gateway/middleware
-      - ./certs:/opt/tyk-gateway/certs
+      - <%= $config_dir -%>/tyk.standalone.conf:/opt/tyk-gateway/tyk.conf
+      - <%= $data_dir -%>/apps:/opt/tyk-gateway/apps
+      - <%= $data_dir -%>/middleware:/opt/tyk-gateway/middleware
+      - <%= $data_dir -%>/certs:/opt/tyk-gateway/certs
     environment:
       - TYK_GW_SECRET=foo
     depends_on:

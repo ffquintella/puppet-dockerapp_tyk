@@ -14,8 +14,8 @@
 
 class dockerapp_tyk  (
   $service_name = 'tyk',
-  $version = '1.5.51',
-  $ports = ['4443:443'],
+  $version = '3.2.0',
+  $ports = '8080:8080',
 
   ){
 
@@ -96,7 +96,18 @@ class dockerapp_tyk  (
   file{ "${conf_datadir}/middleware":
     ensure  => directory,
     recurse => true,
+    require => File[$conf_datadir],
     source  => 'puppet:///modules/dockerapp_tyk/middleware',
+  }
+
+  file {"${conf_configdir}/docker-compose.yml":
+    content => epp('dockerapp_tyk/docker-compose.yml.epp', { 
+      'version' => $version, 
+      'ports' => $ports, 
+      'data_dir' => $conf_datadir,
+      'config_dir' => $conf_configdir  }),
+    notify  => Docker::Run[$service_name],
+    require => File[$conf_configdir],
   }
 
 }
