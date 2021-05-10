@@ -106,8 +106,9 @@ class dockerapp_tyk  (
       'ports' => $ports, 
       'data_dir' => $conf_datadir,
       'config_dir' => $conf_configdir  }),
-    notify  => Docker::Run[$service_name],
     require => File[$conf_configdir],
   }
+
+  #notify  => Docker::Run[$service_name],
 
 }
