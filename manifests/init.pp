@@ -100,6 +100,12 @@ class dockerapp_tyk  (
     source  => 'puppet:///modules/dockerapp_tyk/middleware',
   }
 
+  file{ "${conf_configdir}/tyk.conf":
+    ensure  => file,
+    require => File[$conf_configdir],
+    source  => 'puppet:///modules/dockerapp_tyk/tyk.standalone.conf',
+  }
+
   file {"${conf_configdir}/docker-composer.yml":
     content => epp('dockerapp_tyk/docker-composer.yml.epp', { 
       'version' => $version, 
@@ -107,6 +113,12 @@ class dockerapp_tyk  (
       'data_dir' => $conf_datadir,
       'config_dir' => $conf_configdir  }),
     require => File[$conf_configdir],
+    notify  => Docker_compose["run_${service_name}"],
+  }
+
+  docker_compose { "run_${service_name}":
+    compose_files => ["${conf_configdir}/docker-composer.yml"],
+    ensure  => present,
   }
 
   #notify  => Docker::Run[$service_name],

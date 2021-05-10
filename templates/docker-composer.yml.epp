@@ -6,13 +6,13 @@
 version: '3.3'
 services:
   tyk-gateway:
-    image: docker.tyk.io/tyk-gateway/tyk-gateway:v<%= $version -%>
+    image: docker.tyk.io/tyk-gateway/tyk-gateway:v<%= $version %>
     ports:
-      - <%= $ports -%>
+      - <%= $ports %>
     networks:
       - tyk
     volumes:
-      - <%= $config_dir -%>/tyk.standalone.conf:/opt/tyk-gateway/tyk.conf
+      - <%= $config_dir -%>/tyk.conf:/opt/tyk-gateway/tyk.conf
       - <%= $data_dir -%>/apps:/opt/tyk-gateway/apps
       - <%= $data_dir -%>/middleware:/opt/tyk-gateway/middleware
       - <%= $data_dir -%>/certs:/opt/tyk-gateway/certs
