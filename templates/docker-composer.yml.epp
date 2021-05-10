@@ -13,7 +13,7 @@ services:
       - tyk
     volumes:
       - <%= $config_dir -%>/tyk.conf:/opt/tyk-gateway/tyk.conf
-      - <%= $data_dir -%>/apps:/opt/tyk-gateway/apps
+      - <%= $data_dir -%>/apps/appsfile.json:/opt/tyk-gateway/apps
       - <%= $data_dir -%>/middleware:/opt/tyk-gateway/middleware
       - <%= $data_dir -%>/certs:/opt/tyk-gateway/certs
     environment:
