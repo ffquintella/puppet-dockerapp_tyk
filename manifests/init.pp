@@ -21,8 +21,8 @@ class dockerapp_tyk  (
 
   include 'dockerapp'
 
-  $dir_owner = 1
-  $dir_group = 1
+  $dir_owner = 0
+  $dir_group = 0
 
   $data_dir = $::dockerapp::params::data_dir
   $config_dir = $::dockerapp::params::config_dir
