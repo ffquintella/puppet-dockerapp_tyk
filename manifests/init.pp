@@ -82,8 +82,21 @@ class dockerapp_tyk  (
   file{ "${conf_datadir}/apps":
     ensure  => directory,
     recurse => true,
+    require => File[$conf_datadir],
     source  => 'puppet:///modules/dockerapp_tyk/apps',
   }
 
+  file{ "${conf_datadir}/certs":
+    ensure  => directory,
+    recurse => true,
+    require => File[$conf_datadir],
+    source  => 'puppet:///modules/dockerapp_tyk/certs',
+  }
+
+  file{ "${conf_datadir}/middleware":
+    ensure  => directory,
+    recurse => true,
+    source  => 'puppet:///modules/dockerapp_tyk/middleware',
+  }
 
 }
